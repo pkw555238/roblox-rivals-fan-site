@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A fan-made guide and promotion site for RIVALS, the fast-paced Roblox FPS by Nosniy Games.">
+  <meta name="theme-color" content="#071018">
+  <title>RIVALS // Enter the Duel</title>
+  <style>
+    :root {
+      --ink: #061018;
+      --panel: #0b1721;
+      --panel-2: #101f2b;
+      --line: rgba(255,255,255,.11);
+      --muted: #91a3b0;
+      --white: #f5fbff;
+      --cyan: #42e8ff;
+      --red: #ff3d57;
+      --lime: #bafc45;
+      --yellow: #ffc34d;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 85% 8%, rgba(66,232,255,.10), transparent 25rem),
+        radial-gradient(circle at 10% 35%, rgba(255,61,87,.08), transparent 30rem),
+        var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    section { scroll-margin-top: 90px; }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .section-head { max-width: 720px; margin-bottom: 36px; }
+    .section-head h2 {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: .95;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .section-head p:last-child { color: var(--muted); font-size: 1.06rem; }
+    .section-pad { padding: 110px 0; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--cyan); }
+    .red { color: var(--red); }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      background: rgba(6,16,24,.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+    .nav-wrap { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      text-decoration: none;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      letter-spacing: .07em;
+    }
+    .brand-mark {
+      width: 30px; height: 30px;
+      position: relative;
+      transform: skew(-10deg);
+      background: linear-gradient(135deg, var(--cyan) 0 47%, transparent 48%), linear-gradient(315deg, var(--red) 0 47%, transparent 48%);
+      filter: drop-shadow(0 0 10px rgba(66,232,255,.25));
+    }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { color: #bdcbd5; text-decoration: none; font-size: .82rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { padding: 10px 16px; border: 1px solid var(--cyan); color: var(--cyan) !important; transform: skew(-6deg); }
+    .menu-btn { display: none; border: 0; background: transparent; font-size: 1.6rem; cursor: pointer; }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      position: relative;
+      padding: 130px 0 72px;
+    }
+    .hero-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 42px; align-items: center; }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: .78rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 14px var(--lime); animation: pulse 1.7s infinite; }
+    @keyframes pulse { 50% { opacity: .45; transform: scale(.75); } }
+    .hero h1 {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(5.1rem, 12vw, 10rem);
+      line-height: .75;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      text-shadow: 7px 7px 0 rgba(255,61,87,.65), -4px -2px 0 rgba(66,232,255,.35);
+      transform: skew(-3deg);
+    }
+    .hero h1 span { display: block; font-size: .49em; letter-spacing: .08em; color: transparent; -webkit-text-stroke: 2px var(--white); text-shadow: none; margin-top: 18px; }
+    .hero-lead { max-width: 600px; margin: 30px 0; color: #b9c9d3; font-size: 1.12rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 24px;
+      border: 1px solid var(--line);
+      color: var(--white);
+      background: rgba(255,255,255,.04);
+      text-decoration: none;
+      font-size: .84rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .2s ease;
+      clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+    }
+    .btn:hover { transform: translateY(-3px); border-color: var(--cyan); }
+    .btn-primary { color: #031219; background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 32px rgba(66,232,255,.22); }
+    .btn-primary:hover { color: var(--white); background: transparent; }
+
+    .hero-visual { position: relative; min-height: 590px; }
+    .hero-frame {
+      position: absolute;
+      inset: 25px 0 20px 38px;
+      overflow: hidden;
+      border: 1px solid rgba(66,232,255,.42);
+      border-radius: 4px;
+      clip-path: polygon(0 0, 90% 0, 100% 9%, 100% 100%, 9% 100%, 0 91%);
+      box-shadow: var(--shadow), 20px 20px 0 rgba(255,61,87,.13);
+    }
+    .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,12,18,.88), transparent 55%), linear-gradient(120deg, rgba(66,232,255,.12), transparent 40%); }
+    .hero-frame img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); }
+    .crosshair { position: absolute; left: 52%; top: 44%; z-index: 3; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; }
+    .crosshair::before, .crosshair::after { content: ""; position: absolute; background: rgba(255,255,255,.75); }
+    .crosshair::before { width: 60px; height: 1px; left: -10px; top: 20px; }
+    .crosshair::after { width: 1px; height: 60px; left: 20px; top: -10px; }
+    .score-card {
+      position: absolute;
+      z-index: 4;
+      padding: 14px 18px;
+      background: rgba(7,20,29,.88);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .score-card small { display: block; color: var(--muted); font-size: .62rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .score-card strong { font-family: Impact, sans-serif; font-size: 1.65rem; letter-spacing: .06em; }
+    .score-a { top: 0; right: 24px; border-top: 3px solid var(--cyan); }
+    .score-b { bottom: 0; left: 0; border-left: 3px solid var(--red); }
+    .hero-side-label { position: absolute; right: -55px; top: 50%; z-index: 4; color: rgba(255,255,255,.32); font-size: .65rem; font-weight: 900; letter-spacing: .35em; text-transform: uppercase; transform: rotate(90deg); }
+
+    .ticker { overflow: hidden; border-block: 1px solid var(--line); background: #0a151d; transform: rotate(-1deg) scale(1.02); }
+    .ticker-track { width: max-content; display: flex; gap: 34px; padding: 15px 0; animation: ticker 25s linear infinite; }
+    .ticker span { color: #d7e5ec; font-size: .78rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .ticker span::after { content: "✦"; color: var(--red); margin-left: 34px; }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-top: 48px; background: var(--line); border: 1px solid var(--line); }
+    .stat { padding: 26px; background: var(--panel); }
+    .stat strong { display: block; font-family: Impact, sans-serif; font-size: 2.4rem; letter-spacing: .03em; }
+    .stat span { color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 28px; }
+    .creator-card, .story-card { border: 1px solid var(--line); background: linear-gradient(145deg, rgba(16,31,43,.92), rgba(8,19,27,.92)); border-radius: var(--radius); overflow: hidden; }
+    .creator-card { padding: 34px; position: relative; min-height: 430px; }
+    .creator-card::after { content: "NG"; position: absolute; right: -15px; bottom: -60px; color: rgba(66,232,255,.055); font-family: Impact, sans-serif; font-size: 15rem; line-height: 1; }
+    .creator-badge { width: 80px; height: 80px; display: grid; place-items: center; border: 1px solid var(--cyan); background: #09151e; color: var(--cyan); font-family: Impact, sans-serif; font-size: 2rem; box-shadow: 0 0 35px rgba(66,232,255,.15); transform: rotate(-4deg); }
+    .creator-card h3 { margin: 28px 0 8px; font-family: Impact, sans-serif; font-size: 2.35rem; letter-spacing: .03em; text-transform: uppercase; }
+    .role { color: var(--cyan); font-size: .76rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .mini-roles { position: relative; z-index: 2; display: grid; gap: 13px; margin-top: 34px; }
+    .mini-role { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: .88rem; }
+    .mini-role span:last-child { color: var(--muted); text-align: right; }
+    .story-card { padding: 38px; }
+    .story-card h3 { margin: 0 0 14px; font-size: 1.55rem; }
+    .story-card > p { color: #b4c4ce; }
+    .game-loop { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 28px; }
+    .loop-step { min-height: 150px; padding: 22px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .loop-step b { display: block; margin-bottom: 16px; color: var(--red); font-family: Impact, sans-serif; font-size: 2rem; }
+    .loop-step strong { display: block; margin-bottom: 5px; text-transform: uppercase; }
+    .loop-step span { color: var(--muted); font-size: .88rem; }
+
+    .arsenal { background: linear-gradient(180deg, transparent, rgba(15,32,43,.55), transparent); }
+    .tool-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-btn { padding: 10px 15px; border: 1px solid var(--line); background: transparent; font-size: .74rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .filter-btn:hover, .filter-btn.active { color: #031219; background: var(--cyan); border-color: var(--cyan); }
+    .search-wrap { position: relative; }
+    .search-wrap input { width: min(310px, 78vw); padding: 12px 42px 12px 15px; color: var(--white); border: 1px solid var(--line); background: #07131c; outline: none; }
+    .search-wrap input:focus { border-color: var(--cyan); }
+    .search-wrap::after { content: "⌕"; position: absolute; right: 14px; top: 7px; color: var(--cyan); font-size: 1.3rem; }
+    .weapon-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; }
+    .weapon-card { min-height: 170px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; border: 1px solid var(--line); background: var(--panel); transition: .2s ease; position: relative; overflow: hidden; }
+    .weapon-card:hover { transform: translateY(-4px); border-color: rgba(66,232,255,.55); background: var(--panel-2); }
+    .weapon-card::before { content: attr(data-index); position: absolute; right: 10px; bottom: -18px; color: rgba(255,255,255,.035); font-family: Impact, sans-serif; font-size: 5.5rem; }
+    .weapon-icon { font-size: 1.65rem; filter: grayscale(.3); }
+    .weapon-card h3 { position: relative; z-index: 1; margin: 18px 0 3px; font-size: 1.02rem; text-transform: uppercase; }
+    .weapon-card p { position: relative; z-index: 1; margin: 0; color: var(--muted); font-size: .79rem; }
+    .weapon-tag { align-self: flex-start; margin-top: 18px; padding: 5px 8px; border: 1px solid currentColor; color: var(--cyan); font-size: .6rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .weapon-card[data-category="Secondary"] .weapon-tag { color: var(--yellow); }
+    .weapon-card[data-category="Melee"] .weapon-tag { color: var(--red); }
+    .weapon-card[data-category="Utility"] .weapon-tag { color: var(--lime); }
+    .result-count { margin: 18px 0 0; color: var(--muted); font-size: .78rem; text-align: right; }
+
+    .maps-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 22px; }
+    .map-feature { min-height: 530px; position: relative; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); }
+    .map-feature img { width: 100%; height: 100%; object-fit: cover; }
+    .map-feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #07121a 3%, transparent 72%); }
+    .map-copy { position: absolute; z-index: 2; inset: auto 28px 28px; }
+    .map-copy span { color: var(--red); font-size: .7rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .map-copy h3 { margin: 6px 0; font-family: Impact, sans-serif; font-size: 3rem; text-transform: uppercase; }
+    .map-copy p { margin: 0; color: #c0ced6; }
+    .map-browser { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+    .map-browser h3 { margin-top: 0; text-transform: uppercase; }
+    .map-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 24px; }
+    .map-tab { padding: 8px 11px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: .68rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+    .map-tab.active, .map-tab:hover { color: var(--white); border-color: var(--red); background: rgba(255,61,87,.12); }
+    .map-list { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; max-height: 395px; overflow: auto; padding-right: 8px; scrollbar-color: var(--cyan) #0a131a; }
+    .map-chip { padding: 9px 11px; border: 1px solid var(--line); background: #09151d; color: #c6d3db; font-size: .76rem; }
+    .map-chip::before { content: "◆"; margin-right: 7px; color: var(--cyan); font-size: .55rem; }
+
+    .hub-band { position: relative; overflow: hidden; }
+    .hub-band::before { content: "HUB"; position: absolute; right: -1vw; top: 2rem; color: rgba(255,255,255,.022); font-family: Impact, sans-serif; font-size: 22vw; line-height: 1; }
+    .hub-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; position: relative; }
+    .hub-image { border: 1px solid var(--line); padding: 10px; background: rgba(255,255,255,.03); transform: rotate(-1.2deg); box-shadow: var(--shadow); }
+    .hub-image img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .hub-items { display: grid; gap: 10px; margin-top: 24px; }
+    .hub-item { display: grid; grid-template-columns: 44px 1fr; gap: 15px; padding: 16px; border: 1px solid var(--line); background: rgba(10,23,32,.75); }
+    .hub-item b { width: 44px; height: 44px; display: grid; place-items: center; color: #031219; background: var(--cyan); font-family: Impact, sans-serif; }
+    .hub-item strong { display: block; text-transform: uppercase; font-size: .9rem; }
+    .hub-item span { color: var(--muted); font-size: .82rem; }
+
+    .creator-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .youtube-card { min-height: 280px; padding: 24px; display: flex; flex-direction: column; border: 1px solid var(--line); background: linear-gradient(160deg, var(--panel-2), #08131b); transition: .2s; }
+    .youtube-card:hover { border-color: var(--red); transform: translateY(-4px); }
+    .avatar { width: 72px; height: 72px; display: grid; place-items: center; margin-bottom: 28px; border-radius: 50%; color: #071018; background: linear-gradient(135deg, var(--cyan), #9bf7ff); font-family: Impact, sans-serif; font-size: 1.5rem; box-shadow: 0 0 0 6px rgba(66,232,255,.08); }
+    .youtube-card:nth-child(even) .avatar { background: linear-gradient(135deg, var(--red), #ff97a5); box-shadow: 0 0 0 6px rgba(255,61,87,.08); }
+    .youtube-card h3 { margin: 0 0 8px; font-size: 1.28rem; }
+    .youtube-card p { flex: 1; margin: 0 0 20px; color: var(--muted); font-size: .86rem; }
+    .youtube-card a { color: var(--red); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+    .youtube-card a:hover { color: var(--white); }
+
+    .leaderboard-shell { border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
+    .leaderboard-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 28px; border-bottom: 1px solid var(--line); }
+    .leaderboard-top h3 { margin: 0; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; }
+    .demo-tag { padding: 6px 9px; color: var(--yellow); border: 1px solid rgba(255,195,77,.5); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .sort-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+    .sort-btn { padding: 8px 11px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: .68rem; font-weight: 900; text-transform: uppercase; cursor: pointer; }
+    .sort-btn.active { color: #071018; background: var(--lime); border-color: var(--lime); }
+    .leader-table { width: 100%; border-collapse: collapse; }
+    .leader-table th { padding: 14px 20px; color: var(--muted); background: rgba(255,255,255,.025); font-size: .64rem; letter-spacing: .12em; text-align: left; text-transform: uppercase; }
+    .leader-table td { padding: 17px 20px; border-top: 1px solid var(--line); font-size: .88rem; }
+    .rank { color: var(--muted); font-family: Impact, sans-serif; font-size: 1.25rem; }
+    .rank.top { color: var(--yellow); }
+    .player { display: flex; align-items: center; gap: 12px; font-weight: 800; }
+    .player-badge { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--cyan); background: #07121a; font-size: .7rem; }
+    .bar-cell { min-width: 170px; }
+    .win-bar { height: 6px; overflow: hidden; background: rgba(255,255,255,.07); }
+    .win-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--lime)); }
+    .streak { color: var(--red); font-weight: 900; }
+    .leader-note { margin: 15px 0 0; color: var(--muted); font-size: .76rem; }
+
+    .gallery-grid { display: grid; grid-template-columns: 1.2fr .8fr; grid-template-rows: 250px 250px; gap: 12px; }
+    .gallery-item { position: relative; overflow: hidden; border: 1px solid var(--line); }
+    .gallery-item:first-child { grid-row: 1 / 3; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.055); }
+    .gallery-item::after { content: attr(data-label); position: absolute; inset: auto 14px 14px; padding: 7px 10px; width: max-content; color: var(--white); background: rgba(5,15,22,.8); border-left: 3px solid var(--cyan); font-size: .68rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+
+    .cta { padding: 90px 0 120px; }
+    .cta-box { position: relative; overflow: hidden; padding: 70px 50px; text-align: center; border: 1px solid rgba(66,232,255,.35); background: linear-gradient(135deg, rgba(66,232,255,.12), rgba(255,61,87,.12)), var(--panel); clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px); }
+    .cta-box::before, .cta-box::after { content: ""; position: absolute; width: 180px; height: 180px; border: 1px solid rgba(255,255,255,.08); transform: rotate(45deg); }
+    .cta-box::before { left: -100px; top: -60px; }
+    .cta-box::after { right: -100px; bottom: -60px; }
+    .cta-box h2 { margin: 0; font-family: Impact, sans-serif; font-size: clamp(3rem, 8vw, 6.8rem); line-height: .9; text-transform: uppercase; }
+    .cta-box p { max-width: 580px; margin: 22px auto 30px; color: #bdcbd4; }
+
+    footer { padding: 35px 0; border-top: 1px solid var(--line); background: #050c12; }
+    .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: start; }
+    footer p { max-width: 760px; margin: 12px 0 0; color: #718491; font-size: .75rem; }
+    .source-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+    .source-links a { color: var(--muted); font-size: .7rem; font-weight: 800; text-decoration: none; text-transform: uppercase; }
+    .source-links a:hover { color: var(--cyan); }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; position: absolute; left: 20px; right: 20px; top: 78px; padding: 20px; flex-direction: column; align-items: stretch; background: #091720; border: 1px solid var(--line); box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .hero-grid, .about-grid, .hub-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 120px; }
+      .hero-copy { padding-top: 40px; }
+      .hero-visual { min-height: 520px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .weapon-grid, .creator-grid { grid-template-columns: repeat(2,1fr); }
+      .maps-layout { grid-template-columns: 1fr; }
+      .map-feature { min-height: 420px; }
+      .leaderboard-shell { overflow-x: auto; }
+      .leader-table { min-width: 760px; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(100% - 26px, 1160px); }
+      .section-pad { padding: 78px 0; }
+      .hero { min-height: auto; padding-bottom: 50px; }
+      .hero h1 { font-size: clamp(4.3rem, 25vw, 7rem); }
+      .hero h1 span { margin-top: 13px; }
+      .hero-visual { min-height: 350px; }
+      .hero-frame { inset: 12px 0 12px 15px; }
+      .hero-side-label, .crosshair { display: none; }
+      .score-a { right: 5px; }
+      .stats-grid, .game-loop { grid-template-columns: 1fr; }
+      .weapon-grid, .creator-grid { grid-template-columns: 1fr; }
+      .tool-row { align-items: stretch; }
+      .search-wrap, .search-wrap input { width: 100%; }
+      .map-browser { padding: 20px; }
+      .leaderboard-top { align-items: flex-start; flex-direction: column; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3,220px); }
+      .gallery-item:first-child { grid-row: auto; }
+      .cta-box { padding: 55px 22px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .source-links { justify-content: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="RIVALS fan guide home"><span class="brand-mark" aria-hidden="true"></span> RIVALS // HQ</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">Game</a>
+        <a href="#weapons">Weapons</a>
+        <a href="#maps">Maps</a>
+        <a href="#hub">Hub</a>
+        <a href="#creators">YouTubers</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a class="nav-cta" href="https://www.roblox.com/games/17625359962/RIVALS" target="_blank" rel="noopener">Play now ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="hero-kicker"><span class="live-dot"></span> Fan-made field guide // Updated 2026</div>
+          <h1>Rivals <span>Enter the duel</span></h1>
+          <p class="hero-lead">Fast rounds. Wild movement. One winner. Discover every weapon, explore the arena map pool, learn the hub, and see why Roblox players keep stepping back onto the duel pad.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.roblox.com/games/17625359962/RIVALS" target="_blank" rel="noopener">▶ Play on Roblox</a>
+            <a class="btn" href="#weapons">Explore arsenal ↓</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="hero-frame"><img src="assets/rivals-cover.jpg" alt="Official RIVALS Roblox game artwork"></div>
+          <div class="crosshair" aria-hidden="true"></div>
+          <div class="score-card score-a"><small>Match point</small><strong><span class="accent">4</span> — <span class="red">4</span></strong></div>
+          <div class="score-card score-b"><small>Game mode</small><strong>1V1 DUEL</strong></div>
+          <div class="hero-side-label">Aim // Move // Outplay</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>First to five</span><span>53 weapons</span><span>1v1 to 5v5</span><span>40 maps</span><span>Slide & launch</span><span>Keys & contracts</span>
+        <span>First to five</span><span>53 weapons</span><span>1v1 to 5v5</span><span>40 maps</span><span>Slide & launch</span><span>Keys & contracts</span>
+      </div>
+    </div>
+
+    <section class="section-pad" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">01 // Know the game</p>
+          <h2>Aim is only <span class="accent">half</span> the fight.</h2>
+          <p>RIVALS is a fast-paced Roblox first-person shooter built around short, competitive rounds. Teams from 1v1 to 5v5 race to win five rounds using a four-slot loadout.</p>
+        </div>
+        <div class="stats-grid reveal">
+          <div class="stat"><strong>2024</strong><span>Released June 28</span></div>
+          <div class="stat"><strong>1—5V5</strong><span>Duel team sizes</span></div>
+          <div class="stat"><strong>4</strong><span>Loadout slots</span></div>
+          <div class="stat"><strong>5</strong><span>Rounds to win</span></div>
+        </div>
+        <div class="about-grid" style="margin-top:28px">
+          <article class="creator-card reveal">
+            <div class="creator-badge">NG</div>
+            <p class="role">Developer studio</p>
+            <h3>Nosniy Games</h3>
+            <p class="muted">The Roblox group behind RIVALS, Treasure Quest, and Super Golf.</p>
+            <div class="mini-roles">
+              <div class="mini-role"><span>Nosniy</span><span>Founder & creative lead</span></div>
+              <div class="mini-role"><span>SenseiWarrior</span><span>Owner & lead programmer</span></div>
+              <div class="mini-role"><span>BSlickMusic</span><span>Music composer</span></div>
+              <div class="mini-role"><span>GreatGuyBoom</span><span>Builder & map creator</span></div>
+            </div>
+          </article>
+          <article class="story-card reveal">
+            <p class="eyebrow">The match loop</p>
+            <h3>Easy to enter. Hard to master.</h3>
+            <p>Walk onto a duel pad or use global matchmaking, lock in a primary, secondary, melee, and utility, then combine accuracy with slides, jumps, explosives, and map knowledge.</p>
+            <div class="game-loop">
+              <div class="loop-step"><b>01</b><strong>Queue up</strong><span>Choose a duel size or jump into another game mode.</span></div>
+              <div class="loop-step"><b>02</b><strong>Build a loadout</strong><span>Cover range, mobility, defense, and finishing power.</span></div>
+              <div class="loop-step"><b>03</b><strong>Win the round</strong><span>Eliminate the other side before they eliminate yours.</span></div>
+              <div class="loop-step"><b>04</b><strong>Adapt</strong><span>Read the rival, change routes, and race to five round wins.</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad arsenal" id="weapons">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">02 // Full arsenal</p>
+          <h2>Pick your <span class="red">weapon.</span></h2>
+          <p>Browse all 53 listed weapons across Primary, Secondary, Melee, and Utility. Use the filters or search to find your next loadout piece.</p>
+        </div>
+        <div class="tool-row reveal">
+          <div class="filters" id="weaponFilters">
+            <button class="filter-btn active" data-filter="All">All</button>
+            <button class="filter-btn" data-filter="Primary">Primary</button>
+            <button class="filter-btn" data-filter="Secondary">Secondary</button>
+            <button class="filter-btn" data-filter="Melee">Melee</button>
+            <button class="filter-btn" data-filter="Utility">Utility</button>
+          </div>
+          <label class="search-wrap"><span class="sr-only" style="position:absolute;clip:rect(0,0,0,0)">Search weapons</span><input id="weaponSearch" type="search" placeholder="Search weapon..." autocomplete="off"></label>
+        </div>
+        <div class="weapon-grid" id="weaponGrid" aria-live="polite"></div>
+        <p class="result-count" id="weaponCount"></p>
+      </div>
+    </section>
+
+    <section class="section-pad" id="maps">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">03 // Map intel</p>
+          <h2>Forty ways to <span class="accent">outplay.</span></h2>
+          <p>From the clean sightlines of Arena to Graveyard's eerie cover, every map changes the value of range, movement, and positioning.</p>
+        </div>
+        <div class="maps-layout">
+          <article class="map-feature reveal">
+            <img src="assets/rivals-graveyard.jpg" alt="RIVALS gameplay inside the Graveyard map">
+            <div class="map-copy"><span>Featured map // Graveyard</span><h3>Watch every corner.</h3><p>Atmospheric rooms, tight transitions, and sudden close-range pressure.</p></div>
+          </article>
+          <div class="map-browser reveal">
+            <h3>Map directory <span class="muted">// 40</span></h3>
+            <div class="map-tabs" id="mapTabs">
+              <button class="map-tab active" data-map-filter="All">All</button>
+              <button class="map-tab" data-map-filter="Regular">Regular</button>
+              <button class="map-tab" data-map-filter="Big">Big</button>
+              <button class="map-tab" data-map-filter="Legacy">Legacy</button>
+              <button class="map-tab" data-map-filter="Experimental">Experimental</button>
+              <button class="map-tab" data-map-filter="Special">Special</button>
+            </div>
+            <div class="map-list" id="mapList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad hub-band" id="hub">
+      <div class="container hub-grid">
+        <div class="hub-image reveal"><img src="assets/rivals-range.jpg" alt="RIVALS shooting range gameplay"></div>
+        <div class="reveal">
+          <p class="eyebrow">04 // The hub</p>
+          <div class="section-head" style="margin-bottom:0"><h2>Your mission <span class="red">control.</span></h2><p>The lobby is more than a waiting room. It is where players prepare, practice, unlock gear, check boards, and choose the next fight.</p></div>
+          <div class="hub-items">
+            <div class="hub-item"><b>01</b><div><strong>Duel pads</strong><span>Step onto pads for 1v1 through 5v5 team battles.</span></div></div>
+            <div class="hub-item"><b>02</b><div><strong>Shooting range</strong><span>Test weapons for free and sharpen your accuracy.</span></div></div>
+            <div class="hub-item"><b>03</b><div><strong>Shop & contracts</strong><span>Spend keys, unlock weapons, and chase cosmetic rewards.</span></div></div>
+            <div class="hub-item"><b>04</b><div><strong>Leaderboards</strong><span>See top players and show off your current win streak.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="creators">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">05 // Watch & learn</p>
+          <h2>Creators in the <span class="accent">arena.</span></h2>
+          <p>These Roblox creators have uploaded or streamed RIVALS gameplay, updates, challenges, guides, or competitive matches.</p>
+        </div>
+        <div class="creator-grid">
+          <article class="youtube-card reveal"><div class="avatar">TQ</div><h3>TanqR</h3><p>High-energy challenge videos, random loadouts, update showcases, and big 1v1 matchups.</p><a href="https://www.youtube.com/@TanqR/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar">KC</div><h3>KreekCraft</h3><p>Live update coverage, community events, reactions, and creator-vs-creator duels.</p><a href="https://www.youtube.com/@KreekCraft/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar">BD</div><h3>Bandites</h3><p>Weapon guides, unlock routes, expensive loadouts, and detailed gameplay experiments.</p><a href="https://www.youtube.com/@Bandites/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar">EX</div><h3>elixir</h3><p>Competitive RIVALS scrims, long-form streams, and high-skill community gameplay.</p><a href="https://www.youtube.com/results?search_query=elixir+roblox+rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="leaderboard">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">06 // Fan leaderboard</p>
+          <h2>Climb past the <span class="red">competition.</span></h2>
+          <p>Sort the demo board by wins, win rate, or best streak. This example shows how a community leaderboard can look; it is not connected to live Roblox player data.</p>
+        </div>
+        <div class="leaderboard-shell reveal">
+          <div class="leaderboard-top">
+            <div style="display:flex;align-items:center;gap:12px"><h3>Community elite</h3><span class="demo-tag">Sample data</span></div>
+            <div class="sort-buttons" id="sortButtons">
+              <button class="sort-btn active" data-sort="wins">Wins</button>
+              <button class="sort-btn" data-sort="rate">Win rate</button>
+              <button class="sort-btn" data-sort="streak">Best streak</button>
+            </div>
+          </div>
+          <table class="leader-table">
+            <thead><tr><th>Rank</th><th>Player</th><th>Wins</th><th>Win rate</th><th>Best streak</th></tr></thead>
+            <tbody id="leaderBody"></tbody>
+          </table>
+        </div>
+        <p class="leader-note">Fan concept only. Player names and statistics above are fictional and included for demonstration.</p>
+      </div>
+    </section>
+
+    <section class="section-pad" id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">07 // In the fight</p>
+          <h2>Every second <span class="accent">counts.</span></h2>
+        </div>
+        <div class="gallery-grid reveal">
+          <figure class="gallery-item" data-label="Arena duel"><img src="assets/rivals-arena.jpg" alt="First-person RIVALS match on the Arena map"></figure>
+          <figure class="gallery-item" data-label="Training range"><img src="assets/rivals-range.jpg" alt="Practicing aim in the RIVALS shooting range"></figure>
+          <figure class="gallery-item" data-label="Season weapons"><img src="assets/rivals-weapons.jpg" alt="Grappler and Spear weapon showcase in RIVALS"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <p class="eyebrow">Ready check // 100%</p>
+          <h2>Meet your rival.</h2>
+          <p>Build your four-slot loadout, step onto the pad, and find out whether your aim and movement can carry you to five.</p>
+          <a class="btn btn-primary" href="https://www.roblox.com/games/17625359962/RIVALS" target="_blank" rel="noopener">▶ Launch RIVALS</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span> RIVALS // HQ</a>
+        <p>This is an unofficial fan-made promotional guide. RIVALS, Roblox, names, artwork, and game content belong to their respective owners. Not affiliated with Roblox Corporation or Nosniy Games. Game details may change with updates.</p>
+        <p>Image credits: official Roblox RIVALS listing; gameplay screenshots via Pocket Gamer, Sportskeeda, and GosuGamers.</p>
+      </div>
+      <div class="source-links">
+        <a href="https://www.roblox.com/games/17625359962/RIVALS" target="_blank" rel="noopener">Official game</a>
+        <a href="https://roblox.fandom.com/wiki/Nosniy_Games/RIVALS" target="_blank" rel="noopener">Roblox Wiki</a>
+        <a href="https://robloxrivals.fandom.com/wiki/Weapons" target="_blank" rel="noopener">Weapons source</a>
+        <a href="https://robloxrivals.fandom.com/wiki/Maps" target="_blank" rel="noopener">Maps source</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const weapons = [
+      ["Distortion","Primary","Gravity vortex control","🌀"],["Permafrost","Primary","Freeze-powered pressure","❄️"],["Energy Rifle","Primary","Ricocheting energy beam","⚡"],["Flamethrower","Primary","Close-range fire control","🔥"],
+      ["Grenade Launcher","Primary","Rapid explosive pressure","💥"],["Minigun","Primary","Heavy sustained fire","⚙️"],["Paintball Gun","Primary","Colorful screen disruption","🎨"],["Assault Rifle","Primary","Reliable all-range rifle","🔫"],
+      ["Bow","Primary","Chargeable precision arrows","🏹"],["Burst Rifle","Primary","Three-round hit-and-run","◀"],["Crossbow","Primary","Precision projectile weapon","➶"],["Gunblade","Primary","Firearm and blade hybrid","⚔️"],
+      ["RPG","Primary","High-impact explosive rocket","🚀"],["Shotgun","Primary","Devastating up close","💢"],["Sniper","Primary","Long-range precision damage","🎯"],["Scepter","Primary","Contraband power weapon","♛"],
+      ["Warper","Secondary","Portal-based repositioning","🕳️"],["Energy Pistols","Secondary","Fast energy sidearms","⚡"],["Exogun","Secondary","Explosive energy sidearm","🔆"],["Slingshot","Secondary","Arcing projectile sidearm","⭕"],
+      ["Daggers","Secondary","Rapid thrown blades","🗡️"],["Flare Gun","Secondary","Burning signal shot","🔴"],["Handgun","Secondary","Dependable default sidearm","🔫"],["Revolver","Secondary","Powerful precision sidearm","✹"],
+      ["Shorty","Secondary","Pocket close-range blast","💥"],["Spray","Secondary","Automatic backup weapon","〽️"],["Uzi","Secondary","Rapid compact automatic","⚡"],["Glass Cannon","Secondary","Extreme risk and reward","💎"],
+      ["Maul","Melee","Heavy crushing impact","🔨"],["Spear","Melee","Long reach and throwing","🔱"],["Trowel","Melee","Build and defend","🧱"],["Battle Axe","Melee","Heavy bladed swings","🪓"],
+      ["Chainsaw","Melee","Close-range speed pressure","⛓️"],["Fists","Melee","Free default melee","👊"],["Katana","Melee","Fast defensive blade","⚔️"],["Knife","Melee","Quick classic finisher","🔪"],
+      ["Riot Shield","Melee","Mobile frontal defense","🛡️"],["Scythe","Melee","Movement-focused blade","☾"],["Glass Shard","Melee","Sharp experimental strike","◈"],
+      ["Grappler","Utility","Pull and reposition","🪝"],["Medkit","Utility","Restore health in battle","➕"],["Subspace Tripmine","Utility","Hidden area trap","🟪"],["Warpstone","Utility","Instant movement option","🔮"],
+      ["Flashbang","Utility","Blind and break a push","☀️"],["Freeze Ray","Utility","Slow and freeze targets","❄️"],["Grenade","Utility","Free explosive utility","💣"],["Jump Pad","Utility","Launch into new angles","⏫"],
+      ["Molotov","Utility","Block space with fire","🔥"],["Satchel","Utility","Remote explosive movement","🧨"],["Smoke Grenade","Utility","Break enemy vision","☁️"],["War Horn","Utility","Boost movement pressure","📯"],
+      ["Elixir","Utility","Damage enemies or heal allies","🧪"],["RNG Dice","Utility","Roll for unpredictable power","🎲"]
+    ];
+
+    const maps = [
+      ["Arena","Regular"],["Big Arena","Big"],["Backrooms","Regular"],["Big Backrooms","Big"],["Legacy Backrooms","Legacy"],["Baseplate","Legacy"],
+      ["Battleground","Regular"],["Legacy Battleground","Legacy"],["Boss Arena","Special"],["Bridge","Regular"],["Chess","Regular"],["Construction","Regular"],
+      ["Crossroads","Regular"],["Big Crossroads","Big"],["Legacy Crossroads","Legacy"],["Dimension","Regular"],["Docks","Regular"],["Legacy Docks","Legacy"],
+      ["Factory","Experimental"],["Graveyard","Regular"],["Big Graveyard","Big"],["Iceberg","Regular"],["Museum","Regular"],["Obby","Special"],
+      ["Onyx","Regular"],["Big Onyx","Big"],["Legacy Onyx","Legacy"],["Playground","Regular"],["Sandbox","Experimental"],["Shooting Range","Regular"],
+      ["Splash","Regular"],["Big Splash","Big"],["Legacy Splash","Legacy"],["Legacy Big Splash","Legacy"],["Spleef","Special"],["Station","Regular"],
+      ["Big Station","Big"],["Studio","Regular"],["Village","Regular"],["Westown","Regular"]
+    ];
+
+    const leaders = [
+      {name:"NeonViper", wins:1284, rate:78, streak:41, badge:"NV"},
+      {name:"PixelPhantom", wins:1197, rate:82, streak:36, badge:"PP"},
+      {name:"ZeroGravity", wins:1064, rate:75, streak:52, badge:"ZG"},
+      {name:"CrimsonAim", wins:997, rate:88, streak:29, badge:"CA"},
+      {name:"QuickScopeKai", wins:921, rate:72, streak:34, badge:"QK"},
+      {name:"SlideMaster", wins:875, rate:69, streak:47, badge:"SM"},
+      {name:"FrostByte", wins:812, rate:84, streak:25, badge:"FB"},
+      {name:"RogueRocket", wins:789, rate:73, streak:31, badge:"RR"}
+    ];
+
+    let activeWeapon = "All";
+    let weaponQuery = "";
+    const weaponGrid = document.getElementById("weaponGrid");
+    const weaponCount = document.getElementById("weaponCount");
+
+    function renderWeapons() {
+      const shown = weapons.filter(([name, category]) => (activeWeapon === "All" || category === activeWeapon) && name.toLowerCase().includes(weaponQuery));
+      weaponGrid.innerHTML = shown.map(([name, category, desc, icon]) => {
+        const index = String(weapons.findIndex(w => w[0] === name) + 1).padStart(2,"0");
+        return `<article class="weapon-card" data-category="${category}" data-index="${index}"><span class="weapon-icon" aria-hidden="true">${icon}</span><div><h3>${name}</h3><p>${desc}</p><span class="weapon-tag">${category}</span></div></article>`;
+      }).join("");
+      weaponCount.textContent = `Showing ${shown.length} of ${weapons.length} weapons`;
+    }
+
+    document.getElementById("weaponFilters").addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      activeWeapon = btn.dataset.filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b === btn));
+      renderWeapons();
+    });
+    document.getElementById("weaponSearch").addEventListener("input", e => { weaponQuery = e.target.value.trim().toLowerCase(); renderWeapons(); });
+
+    const mapList = document.getElementById("mapList");
+    function renderMaps(filter="All") {
+      const shown = maps.filter(([,type]) => filter === "All" || type === filter);
+      mapList.innerHTML = shown.map(([name,type]) => `<span class="map-chip" title="${type} map">${name}</span>`).join("");
+    }
+    document.getElementById("mapTabs").addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.querySelectorAll(".map-tab").forEach(b => b.classList.toggle("active", b === btn));
+      renderMaps(btn.dataset.mapFilter);
+    });
+
+    function renderLeaders(sort="wins") {
+      const sorted = [...leaders].sort((a,b) => b[sort] - a[sort]);
+      document.getElementById("leaderBody").innerHTML = sorted.map((p,i) => `<tr>
+        <td><span class="rank ${i < 3 ? "top" : ""}">#${String(i+1).padStart(2,"0")}</span></td>
+        <td><div class="player"><span class="player-badge">${p.badge}</span>${p.name}</div></td>
+        <td>${p.wins.toLocaleString()}</td>
+        <td class="bar-cell"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span>${p.rate}%</span></div><div class="win-bar"><i style="width:${p.rate}%"></i></div></td>
+        <td><span class="streak">🔥 ${p.streak}</span></td>
+      </tr>`).join("");
+    }
+    document.getElementById("sortButtons").addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.querySelectorAll(".sort-btn").forEach(b => b.classList.toggle("active", b === btn));
+      renderLeaders(btn.dataset.sort);
+    });
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.textContent = open ? "✕" : "☰";
+    });
+    navLinks.addEventListener("click", e => {
+      if (e.target.matches("a")) { navLinks.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false"); menuBtn.textContent = "☰"; }
+    });
+
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+    }), {threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    renderWeapons();
+    renderMaps();
+    renderLeaders();
+  </script>
+</body>
+</html>
+

@@ -275,20 +275,29 @@
     .creator-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
     .youtube-card { min-height: 280px; padding: 24px; display: flex; flex-direction: column; border: 1px solid var(--line); background: linear-gradient(160deg, var(--panel-2), #08131b); transition: .2s; }
     .youtube-card:hover { border-color: var(--red); transform: translateY(-4px); }
-    .avatar { width: 72px; height: 72px; display: grid; place-items: center; margin-bottom: 28px; border-radius: 50%; color: #071018; background: linear-gradient(135deg, var(--cyan), #9bf7ff); font-family: Impact, sans-serif; font-size: 1.5rem; box-shadow: 0 0 0 6px rgba(66,232,255,.08); }
+    .avatar { width: 72px; height: 72px; display: grid; place-items: center; overflow: hidden; margin-bottom: 28px; border: 2px solid var(--cyan); border-radius: 50%; color: #071018; background: linear-gradient(135deg, var(--cyan), #9bf7ff); font-family: Impact, sans-serif; font-size: 1.5rem; box-shadow: 0 0 0 6px rgba(66,232,255,.08); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
     .youtube-card:nth-child(even) .avatar { background: linear-gradient(135deg, var(--red), #ff97a5); box-shadow: 0 0 0 6px rgba(255,61,87,.08); }
     .youtube-card h3 { margin: 0 0 8px; font-size: 1.28rem; }
     .youtube-card p { flex: 1; margin: 0 0 20px; color: var(--muted); font-size: .86rem; }
     .youtube-card a { color: var(--red); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
     .youtube-card a:hover { color: var(--white); }
 
-    .leaderboard-shell { border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
+    .leaderboard-shell { overflow: hidden; border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
     .leaderboard-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 28px; border-bottom: 1px solid var(--line); }
     .leaderboard-top h3 { margin: 0; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; }
-    .demo-tag { padding: 6px 9px; color: var(--yellow); border: 1px solid rgba(255,195,77,.5); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-    .sort-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
-    .sort-btn { padding: 8px 11px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: .68rem; font-weight: 900; text-transform: uppercase; cursor: pointer; }
-    .sort-btn.active { color: #071018; background: var(--lime); border-color: var(--lime); }
+    .local-tag { padding: 6px 9px; color: var(--lime); border: 1px solid rgba(200,255,46,.45); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .score-form { display: grid; grid-template-columns: 1.25fr .65fr .65fr .7fr 1fr auto; gap: 12px; align-items: end; padding: 22px 28px; background: rgba(66,232,255,.035); border-bottom: 1px solid var(--line); }
+    .score-field { display: grid; gap: 7px; }
+    .score-field span { color: var(--muted); font-size: .61rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .score-field input, .score-field select { width: 100%; height: 43px; padding: 0 11px; color: var(--white); background: #07121a; border: 1px solid var(--line); border-radius: 0; font: inherit; font-size: .78rem; outline: none; }
+    .score-field input:focus, .score-field select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(66,232,255,.1); }
+    .score-field select option { color: var(--white); background: #07121a; }
+    .score-submit { height: 43px; padding: 0 17px; border: 1px solid var(--lime); color: #071018; background: var(--lime); font-size: .67rem; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .score-submit:hover { filter: brightness(1.08); }
+    .leader-feedback { min-height: 0; padding: 0 28px; color: var(--lime); font-size: .72rem; font-weight: 800; }
+    .leader-feedback.show { min-height: 38px; padding-top: 11px; padding-bottom: 11px; border-bottom: 1px solid var(--line); }
+    .leaderboard-table-wrap { overflow-x: auto; }
     .leader-table { width: 100%; border-collapse: collapse; }
     .leader-table th { padding: 14px 20px; color: var(--muted); background: rgba(255,255,255,.025); font-size: .64rem; letter-spacing: .12em; text-align: left; text-transform: uppercase; }
     .leader-table td { padding: 17px 20px; border-top: 1px solid var(--line); font-size: .88rem; }
@@ -296,10 +305,9 @@
     .rank.top { color: var(--yellow); }
     .player { display: flex; align-items: center; gap: 12px; font-weight: 800; }
     .player-badge { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--cyan); background: #07121a; font-size: .7rem; }
-    .bar-cell { min-width: 170px; }
-    .win-bar { height: 6px; overflow: hidden; background: rgba(255,255,255,.07); }
-    .win-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--lime)); }
-    .streak { color: var(--red); font-weight: 900; }
+    .score-value { color: var(--lime); font-family: Impact, sans-serif; font-size: 1.2rem; letter-spacing: .04em; }
+    .mode-chip { display: inline-block; padding: 5px 8px; color: var(--cyan); border: 1px solid rgba(66,232,255,.35); font-size: .66rem; font-weight: 900; }
+    .leader-empty { padding: 34px 20px !important; color: var(--muted); text-align: center; }
     .leader-note { margin: 15px 0 0; color: var(--muted); font-size: .76rem; }
 
     .gallery-grid { display: grid; grid-template-columns: 1.2fr .8fr; grid-template-rows: 250px 250px; gap: 12px; }
@@ -339,8 +347,9 @@
       .weapon-grid, .creator-grid { grid-template-columns: repeat(2,1fr); }
       .maps-layout { grid-template-columns: 1fr; }
       .map-feature { min-height: 420px; }
-      .leaderboard-shell { overflow-x: auto; }
-      .leader-table { min-width: 760px; }
+      .score-form { grid-template-columns: repeat(3, 1fr); }
+      .score-submit { width: 100%; }
+      .leader-table { min-width: 780px; }
     }
 
     @media (max-width: 620px) {
@@ -359,6 +368,7 @@
       .search-wrap, .search-wrap input { width: 100%; }
       .map-browser { padding: 20px; }
       .leaderboard-top { align-items: flex-start; flex-direction: column; }
+      .score-form { grid-template-columns: 1fr; padding: 20px; }
       .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3,220px); }
       .gallery-item:first-child { grid-row: auto; }
       .cta-box { padding: 55px 22px; }
@@ -530,13 +540,13 @@
         <div class="section-head reveal">
           <p class="eyebrow">05 // Watch & learn</p>
           <h2>Creators in the <span class="accent">arena.</span></h2>
-          <p>These Roblox creators have uploaded or streamed RIVALS gameplay, updates, challenges, guides, or competitive matches.</p>
+          <p>These verified channels feature current RIVALS gameplay, updates, challenges, guides, or competitive matches.</p>
         </div>
         <div class="creator-grid">
-          <article class="youtube-card reveal"><div class="avatar">TQ</div><h3>TanqR</h3><p>High-energy challenge videos, random loadouts, update showcases, and big 1v1 matchups.</p><a href="https://www.youtube.com/@TanqR/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
-          <article class="youtube-card reveal"><div class="avatar">KC</div><h3>KreekCraft</h3><p>Live update coverage, community events, reactions, and creator-vs-creator duels.</p><a href="https://www.youtube.com/@KreekCraft/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
-          <article class="youtube-card reveal"><div class="avatar">BD</div><h3>Bandites</h3><p>Weapon guides, unlock routes, expensive loadouts, and detailed gameplay experiments.</p><a href="https://www.youtube.com/@Bandites/search?query=rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
-          <article class="youtube-card reveal"><div class="avatar">EX</div><h3>elixir</h3><p>Competitive RIVALS scrims, long-form streams, and high-skill community gameplay.</p><a href="https://www.youtube.com/results?search_query=elixir+roblox+rivals" target="_blank" rel="noopener">Watch RIVALS videos ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar"><img src="https://yt3.googleusercontent.com/ytc/AIdro_nroVvwtUqkQbxr22X8bpy06QeirDqlvMC8zEave3fWaIA=s900-c-k-c0x00ffffff-no-rj" alt="TanqR YouTube profile picture"></div><h3>TanqR</h3><p>RIVALS challenges, new-weapon tests, streamer battles, and high-energy 1v1 videos.</p><a href="https://www.youtube.com/@TanqR" target="_blank" rel="noopener">Visit TanqR ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar"><img src="https://yt3.googleusercontent.com/eLmD-X0mb54MJuCb78p0vqtutywAAT9gqENQ2i7KU46oppAkwh_Ku7PJl1YUwxuhOLG34nnF7cA=s900-c-k-c0x00ffffff-no-rj" alt="elixir YouTube profile picture"></div><h3>elixir</h3><p>Competitive RIVALS gameplay, challenge videos, livestreams, scrims, and creator 1v1s.</p><a href="https://www.youtube.com/@elixirblx" target="_blank" rel="noopener">Visit elixir ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar"><img src="https://yt3.googleusercontent.com/SLtenMyMoy12WMeaH7x0-Td51MmCk4R8ABxeAVPzDYrDs7fcult43FL2MEkfWoPqVdDqmS7TAgA=s900-c-k-c0x00ffffff-no-rj" alt="Swift YouTube profile picture"></div><h3>Swift</h3><p>Ranked strategy, pro-player spotlights, weapon unlocks, and high-level RIVALS matches.</p><a href="https://www.youtube.com/channel/UCHaJec36RCSY04DvIy6MfVA" target="_blank" rel="noopener">Visit Swift ↗</a></article>
+          <article class="youtube-card reveal"><div class="avatar"><img src="https://yt3.googleusercontent.com/XXd0yQT6wsXRoaEUACU2bcVXslACSL7KWgnMLROPsfBvjtqlk5_9R9eDdHj8Ot1LKKRi-4zW5Q=s900-c-k-c0x00ffffff-no-rj" alt="SlingshotBwai YouTube profile picture"></div><h3>SlingshotBwai</h3><p>Winstreak battles, settings guides, coaching videos, and competitive RIVALS challenges.</p><a href="https://www.youtube.com/@slingshotbwaii" target="_blank" rel="noopener">Visit SlingshotBwai ↗</a></article>
         </div>
       </div>
     </section>
@@ -544,25 +554,32 @@
     <section class="section-pad" id="leaderboard">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">06 // Fan leaderboard</p>
-          <h2>Climb past the <span class="red">competition.</span></h2>
-          <p>Sort the demo board by wins, win rate, or best streak. This example shows how a community leaderboard can look; it is not connected to live Roblox player data.</p>
+          <p class="eyebrow">06 // 67kid leaderboard</p>
+          <h2>Rule the <span class="red">arena.</span></h2>
+          <p>Record your best Neon Rivals Arena result. Rankings now use the game's real match details: eliminations, wave, team mode, and arena map.</p>
         </div>
         <div class="leaderboard-shell reveal">
           <div class="leaderboard-top">
-            <div style="display:flex;align-items:center;gap:12px"><h3>Community elite</h3><span class="demo-tag">Sample data</span></div>
-            <div class="sort-buttons" id="sortButtons">
-              <button class="sort-btn active" data-sort="wins">Wins</button>
-              <button class="sort-btn" data-sort="rate">Win rate</button>
-              <button class="sort-btn" data-sort="streak">Best streak</button>
-            </div>
+            <h3>Match rankings</h3>
+            <span class="local-tag">Saved on this device</span>
           </div>
-          <table class="leader-table">
-            <thead><tr><th>Rank</th><th>Player</th><th>Wins</th><th>Win rate</th><th>Best streak</th></tr></thead>
-            <tbody id="leaderBody"></tbody>
-          </table>
+          <form class="score-form" id="scoreForm">
+            <label class="score-field"><span>Player name</span><input id="playerName" type="text" maxlength="18" placeholder="Your name" autocomplete="nickname" required></label>
+            <label class="score-field"><span>Eliminations</span><input id="playerScore" type="number" min="0" max="20" value="20" required></label>
+            <label class="score-field"><span>Best wave</span><input id="playerWave" type="number" min="1" max="99" value="1" required></label>
+            <label class="score-field"><span>Mode</span><select id="playerMode"><option>1V1</option><option>2V2</option><option>3V3</option></select></label>
+            <label class="score-field"><span>Arena</span><select id="playerMap"><option>Neon Arena</option><option>Liminal Halls</option><option>Skybridge</option><option>Crossroads 2049</option><option>Ironworks</option><option>The Rift</option><option>Neon Harbor</option><option>Frostline</option><option>Ember Core</option><option>Metro Station</option></select></label>
+            <button class="score-submit" type="submit">Add result</button>
+          </form>
+          <div class="leader-feedback" id="leaderFeedback" role="status" aria-live="polite"></div>
+          <div class="leaderboard-table-wrap">
+            <table class="leader-table">
+              <thead><tr><th>Rank</th><th>Player</th><th>Eliminations</th><th>Wave</th><th>Mode</th><th>Arena</th></tr></thead>
+              <tbody id="leaderBody"></tbody>
+            </table>
+          </div>
         </div>
-        <p class="leader-note">Fan concept only. Player names and statistics above are fictional and included for demonstration.</p>
+        <p class="leader-note">Play a match, then add your result here. This honest local leaderboard stores player-entered results in this browser only; it does not claim to show made-up global scores.</p>
       </div>
     </section>
 
@@ -636,16 +653,14 @@
       ["Big Station","Big"],["Studio","Regular"],["Village","Regular"],["Westown","Regular"]
     ];
 
-    const leaders = [
-      {name:"NeonViper", wins:1284, rate:78, streak:41, badge:"NV"},
-      {name:"PixelPhantom", wins:1197, rate:82, streak:36, badge:"PP"},
-      {name:"ZeroGravity", wins:1064, rate:75, streak:52, badge:"ZG"},
-      {name:"CrimsonAim", wins:997, rate:88, streak:29, badge:"CA"},
-      {name:"QuickScopeKai", wins:921, rate:72, streak:34, badge:"QK"},
-      {name:"SlideMaster", wins:875, rate:69, streak:47, badge:"SM"},
-      {name:"FrostByte", wins:812, rate:84, streak:25, badge:"FB"},
-      {name:"RogueRocket", wins:789, rate:73, streak:31, badge:"RR"}
-    ];
+    const leaderStorageKey = "67kid-neon-rivals-results-v1";
+    let leaders = [];
+    try {
+      const savedLeaders = JSON.parse(localStorage.getItem(leaderStorageKey) || "[]");
+      leaders = Array.isArray(savedLeaders) ? savedLeaders : [];
+    } catch (_) {
+      leaders = [];
+    }
 
     let activeWeapon = "All";
     let weaponQuery = "";
@@ -682,21 +697,50 @@
       renderMaps(btn.dataset.mapFilter);
     });
 
-    function renderLeaders(sort="wins") {
-      const sorted = [...leaders].sort((a,b) => b[sort] - a[sort]);
-      document.getElementById("leaderBody").innerHTML = sorted.map((p,i) => `<tr>
-        <td><span class="rank ${i < 3 ? "top" : ""}">#${String(i+1).padStart(2,"0")}</span></td>
-        <td><div class="player"><span class="player-badge">${p.badge}</span>${p.name}</div></td>
-        <td>${p.wins.toLocaleString()}</td>
-        <td class="bar-cell"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span>${p.rate}%</span></div><div class="win-bar"><i style="width:${p.rate}%"></i></div></td>
-        <td><span class="streak">🔥 ${p.streak}</span></td>
-      </tr>`).join("");
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[character]);
     }
-    document.getElementById("sortButtons").addEventListener("click", e => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-      document.querySelectorAll(".sort-btn").forEach(b => b.classList.toggle("active", b === btn));
-      renderLeaders(btn.dataset.sort);
+
+    function renderLeaders() {
+      const body = document.getElementById("leaderBody");
+      const sorted = [...leaders]
+        .sort((a,b) => b.score - a.score || b.wave - a.wave || b.createdAt - a.createdAt)
+        .slice(0, 20);
+      if (!sorted.length) {
+        body.innerHTML = '<tr><td class="leader-empty" colspan="6">No results yet — play 67kid Arena and become the first ranked player.</td></tr>';
+        return;
+      }
+      body.innerHTML = sorted.map((player,index) => {
+        const initials = player.name.trim().split(/\s+/).map(part => part[0]).join("").slice(0,2).toUpperCase();
+        return `<tr>
+          <td><span class="rank ${index < 3 ? "top" : ""}">#${String(index+1).padStart(2,"0")}</span></td>
+          <td><div class="player"><span class="player-badge">${escapeHTML(initials || "67")}</span>${escapeHTML(player.name)}</div></td>
+          <td><span class="score-value">${player.score}/20</span></td>
+          <td>Wave ${player.wave}</td>
+          <td><span class="mode-chip">${escapeHTML(player.mode)}</span></td>
+          <td>${escapeHTML(player.map)}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    document.getElementById("scoreForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("playerName").value.trim();
+      const score = Math.max(0, Math.min(20, Number(document.getElementById("playerScore").value)));
+      const wave = Math.max(1, Math.min(99, Number(document.getElementById("playerWave").value)));
+      const mode = document.getElementById("playerMode").value;
+      const map = document.getElementById("playerMap").value;
+      if (!name || !Number.isFinite(score) || !Number.isFinite(wave)) return;
+      leaders.push({name, score, wave, mode, map, createdAt: Date.now()});
+      leaders = leaders.sort((a,b) => b.score - a.score || b.wave - a.wave || b.createdAt - a.createdAt).slice(0, 20);
+      localStorage.setItem(leaderStorageKey, JSON.stringify(leaders));
+      renderLeaders();
+      const feedback = document.getElementById("leaderFeedback");
+      feedback.textContent = `${name}'s ${score}/20 result was added to this device.`;
+      feedback.classList.add("show");
+      event.target.reset();
+      document.getElementById("playerScore").value = 20;
+      document.getElementById("playerWave").value = 1;
     });
 
     const menuBtn = document.getElementById("menuBtn");

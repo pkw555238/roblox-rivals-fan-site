@@ -6,6 +6,7 @@
   <meta name="description" content="A fan-made guide and promotion site for RIVALS, the fast-paced Roblox FPS by Nosniy Games.">
   <meta name="theme-color" content="#071018">
   <title>RIVALS // Enter the Duel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
     :root {
       --ink: #061018;
@@ -283,11 +284,11 @@
     .youtube-card a { color: var(--red); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
     .youtube-card a:hover { color: var(--white); }
 
-    .leaderboard-shell { overflow: hidden; border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
-    .leaderboard-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 28px; border-bottom: 1px solid var(--line); }
-    .leaderboard-top h3 { margin: 0; font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; }
-    .local-tag { padding: 6px 9px; color: var(--lime); border: 1px solid rgba(200,255,46,.45); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
-    .score-form { display: grid; grid-template-columns: 1.25fr .65fr .65fr .7fr 1fr auto; gap: 12px; align-items: end; padding: 22px 28px; background: rgba(66,232,255,.035); border-bottom: 1px solid var(--line); }
+    .leaderboard-shell { max-width: 850px; margin-inline: auto; overflow: hidden; border: 4px solid #84b3ff; border-radius: 18px; background: #061624; box-shadow: 0 0 0 8px rgba(17,40,62,.75), 0 26px 80px rgba(0,0,0,.45), inset 0 0 40px rgba(73,151,255,.07); }
+    .leaderboard-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 28px; border-bottom: 2px solid rgba(132,179,255,.38); background: linear-gradient(180deg, #102941, #071a2b); }
+    .leaderboard-top h3 { margin: 0; color: #d8e8ff; font-family: Impact, sans-serif; font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: .03em; text-shadow: 0 3px 0 #274875; }
+    .local-tag { padding: 8px 12px; color: #fff; border: 2px solid #ff4d56; border-radius: 4px; background: #ed1523; box-shadow: 0 4px 0 #8c0b15; font-size: .72rem; font-weight: 950; letter-spacing: .1em; text-transform: uppercase; transform: rotate(-1deg); }
+    .score-form { display: grid; grid-template-columns: 1.35fr .65fr auto; gap: 12px; align-items: end; padding: 20px 24px; background: rgba(36,95,142,.12); border-bottom: 1px solid rgba(132,179,255,.22); }
     .score-field { display: grid; gap: 7px; }
     .score-field span { color: var(--muted); font-size: .61rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
     .score-field input, .score-field select { width: 100%; height: 43px; padding: 0 11px; color: var(--white); background: #07121a; border: 1px solid var(--line); border-radius: 0; font: inherit; font-size: .78rem; outline: none; }
@@ -297,17 +298,20 @@
     .score-submit:hover { filter: brightness(1.08); }
     .leader-feedback { min-height: 0; padding: 0 28px; color: var(--lime); font-size: .72rem; font-weight: 800; }
     .leader-feedback.show { min-height: 38px; padding-top: 11px; padding-bottom: 11px; border-bottom: 1px solid var(--line); }
-    .leaderboard-table-wrap { overflow-x: auto; }
-    .leader-table { width: 100%; border-collapse: collapse; }
-    .leader-table th { padding: 14px 20px; color: var(--muted); background: rgba(255,255,255,.025); font-size: .64rem; letter-spacing: .12em; text-align: left; text-transform: uppercase; }
-    .leader-table td { padding: 17px 20px; border-top: 1px solid var(--line); font-size: .88rem; }
-    .rank { color: var(--muted); font-family: Impact, sans-serif; font-size: 1.25rem; }
-    .rank.top { color: var(--yellow); }
+    .streak-list { display: grid; gap: 8px; margin: 0; padding: 18px; list-style: none; }
+    .streak-row { display: grid; grid-template-columns: 64px minmax(0,1fr) auto; align-items: center; gap: 15px; min-height: 68px; padding: 10px 18px; border: 1px solid rgba(132,179,255,.14); border-radius: 8px; background: rgba(7,25,41,.88); }
+    .streak-row:first-child { min-height: 86px; border: 3px solid #86b4ff; background: linear-gradient(100deg, rgba(38,91,143,.45), rgba(12,38,62,.92)); box-shadow: inset 0 0 28px rgba(97,163,255,.13); }
+    .rank { color: #edf6ff; font-family: Impact, sans-serif; font-size: 1.35rem; text-align: center; }
+    .rank.top { color: var(--yellow); font-size: 1.8rem; text-shadow: 0 2px 0 #6f4b00; }
     .player { display: flex; align-items: center; gap: 12px; font-weight: 800; }
-    .player-badge { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--cyan); background: #07121a; font-size: .7rem; }
-    .score-value { color: var(--lime); font-family: Impact, sans-serif; font-size: 1.2rem; letter-spacing: .04em; }
-    .mode-chip { display: inline-block; padding: 5px 8px; color: var(--cyan); border: 1px solid rgba(66,232,255,.35); font-size: .66rem; font-weight: 900; }
-    .leader-empty { padding: 34px 20px !important; color: var(--muted); text-align: center; }
+    .player-badge { width: 42px; height: 42px; display: grid; place-items: center; overflow: hidden; flex: 0 0 auto; border: 2px solid rgba(255,255,255,.24); border-radius: 50%; color: var(--cyan); background: #07121a; font-size: .7rem; }
+    .player-badge img { width: 100%; height: 100%; object-fit: cover; }
+    .player-name { min-width: 0; }
+    .player-name strong { display: block; overflow: hidden; color: #fff; font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+    .player-name small { display: block; margin-top: 3px; color: #758da2; font-size: .65rem; }
+    .streak-value { min-width: 112px; color: #fff; font-family: Impact, sans-serif; font-size: 1.55rem; letter-spacing: .04em; text-align: right; }
+    .streak-value i { margin-right: 7px; color: #ff681f; filter: drop-shadow(0 2px 0 #801c00); }
+    .leader-empty { padding: 34px 20px; color: var(--muted); text-align: center; }
     .leader-note { margin: 15px 0 0; color: var(--muted); font-size: .76rem; }
 
     .gallery-grid { display: grid; grid-template-columns: 1.2fr .8fr; grid-template-rows: 250px 250px; gap: 12px; }
@@ -347,9 +351,8 @@
       .weapon-grid, .creator-grid { grid-template-columns: repeat(2,1fr); }
       .maps-layout { grid-template-columns: 1fr; }
       .map-feature { min-height: 420px; }
-      .score-form { grid-template-columns: repeat(3, 1fr); }
+      .score-form { grid-template-columns: 1fr 1fr; }
       .score-submit { width: 100%; }
-      .leader-table { min-width: 780px; }
     }
 
     @media (max-width: 620px) {
@@ -369,6 +372,11 @@
       .map-browser { padding: 20px; }
       .leaderboard-top { align-items: flex-start; flex-direction: column; }
       .score-form { grid-template-columns: 1fr; padding: 20px; }
+      .streak-list { padding: 10px; }
+      .streak-row { grid-template-columns: 44px minmax(0,1fr) auto; gap: 9px; padding: 9px 10px; }
+      .player-badge { width: 35px; height: 35px; }
+      .player-name small { display: none; }
+      .streak-value { min-width: 86px; font-size: 1.2rem; }
       .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(3,220px); }
       .gallery-item:first-child { grid-row: auto; }
       .cta-box { padding: 55px 22px; }
@@ -554,32 +562,24 @@
     <section class="section-pad" id="leaderboard">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">06 // 67kid leaderboard</p>
-          <h2>Rule the <span class="red">arena.</span></h2>
-          <p>Record your best Neon Rivals Arena result. Rankings now use the game's real match details: eliminations, wave, team mode, and arena map.</p>
+          <p class="eyebrow">06 // Win streak leaderboard</p>
+          <h2>Keep the streak <span class="red">alive.</span></h2>
+          <p>Rank players by consecutive wins, inspired by the in-game Win Streaks board in your screenshot.</p>
         </div>
         <div class="leaderboard-shell reveal">
           <div class="leaderboard-top">
-            <h3>Match rankings</h3>
-            <span class="local-tag">Saved on this device</span>
+            <h3>Win Streaks</h3>
+            <span class="local-tag">● Local</span>
           </div>
           <form class="score-form" id="scoreForm">
             <label class="score-field"><span>Player name</span><input id="playerName" type="text" maxlength="18" placeholder="Your name" autocomplete="nickname" required></label>
-            <label class="score-field"><span>Eliminations</span><input id="playerScore" type="number" min="0" max="20" value="20" required></label>
-            <label class="score-field"><span>Best wave</span><input id="playerWave" type="number" min="1" max="99" value="1" required></label>
-            <label class="score-field"><span>Mode</span><select id="playerMode"><option>1V1</option><option>2V2</option><option>3V3</option></select></label>
-            <label class="score-field"><span>Arena</span><select id="playerMap"><option>Neon Arena</option><option>Liminal Halls</option><option>Skybridge</option><option>Crossroads 2049</option><option>Ironworks</option><option>The Rift</option><option>Neon Harbor</option><option>Frostline</option><option>Ember Core</option><option>Metro Station</option></select></label>
-            <button class="score-submit" type="submit">Add result</button>
+            <label class="score-field"><span>Win streak</span><input id="playerStreak" type="number" min="0" max="999999" value="1" required></label>
+            <button class="score-submit" type="submit">Add streak</button>
           </form>
           <div class="leader-feedback" id="leaderFeedback" role="status" aria-live="polite"></div>
-          <div class="leaderboard-table-wrap">
-            <table class="leader-table">
-              <thead><tr><th>Rank</th><th>Player</th><th>Eliminations</th><th>Wave</th><th>Mode</th><th>Arena</th></tr></thead>
-              <tbody id="leaderBody"></tbody>
-            </table>
-          </div>
+          <ol class="streak-list" id="leaderBody"></ol>
         </div>
-        <p class="leader-note">Play a match, then add your result here. This honest local leaderboard stores player-entered results in this browser only; it does not claim to show made-up global scores.</p>
+        <p class="leader-note">The starting rankings follow your supplied screenshot. New entries are saved only in this browser, so the red badge says Local instead of claiming live Roblox data.</p>
       </div>
     </section>
 
@@ -653,13 +653,20 @@
       ["Big Station","Big"],["Studio","Regular"],["Village","Regular"],["Westown","Regular"]
     ];
 
-    const leaderStorageKey = "67kid-neon-rivals-results-v1";
-    let leaders = [];
+    const leaderStorageKey = "67kid-win-streaks-v1";
+    const referenceStreaks = [
+      {name:"SlingshotBwai", streak:33810, handle:"@SlayerMonsterKiller", avatar:"https://yt3.googleusercontent.com/XXd0yQT6wsXRoaEUACU2bcVXslACSL7KWgnMLROPsfBvjtqlk5_9R9eDdHj8Ot1LKKRi-4zW5Q=s900-c-k-c0x00ffffff-no-rj", createdAt:5},
+      {name:"Warrior", streak:30018, handle:"Reference board", createdAt:4},
+      {name:"YOSH", streak:19770, handle:"Reference board", createdAt:3},
+      {name:"imuo148", streak:18495, handle:"Reference board", createdAt:2},
+      {name:"IMFEARED", streak:17838, handle:"Reference board", createdAt:1}
+    ];
+    let leaders = referenceStreaks;
     try {
-      const savedLeaders = JSON.parse(localStorage.getItem(leaderStorageKey) || "[]");
-      leaders = Array.isArray(savedLeaders) ? savedLeaders : [];
+      const savedLeaders = JSON.parse(localStorage.getItem(leaderStorageKey) || "null");
+      leaders = Array.isArray(savedLeaders) ? savedLeaders : referenceStreaks;
     } catch (_) {
-      leaders = [];
+      leaders = referenceStreaks;
     }
 
     let activeWeapon = "All";
@@ -704,43 +711,37 @@
     function renderLeaders() {
       const body = document.getElementById("leaderBody");
       const sorted = [...leaders]
-        .sort((a,b) => b.score - a.score || b.wave - a.wave || b.createdAt - a.createdAt)
-        .slice(0, 20);
+        .sort((a,b) => b.streak - a.streak || b.createdAt - a.createdAt)
+        .slice(0, 10);
       if (!sorted.length) {
-        body.innerHTML = '<tr><td class="leader-empty" colspan="6">No results yet — play 67kid Arena and become the first ranked player.</td></tr>';
+        body.innerHTML = '<li class="leader-empty">No win streaks yet — play 67kid Arena and become the first ranked player.</li>';
         return;
       }
       body.innerHTML = sorted.map((player,index) => {
         const initials = player.name.trim().split(/\s+/).map(part => part[0]).join("").slice(0,2).toUpperCase();
-        return `<tr>
-          <td><span class="rank ${index < 3 ? "top" : ""}">#${String(index+1).padStart(2,"0")}</span></td>
-          <td><div class="player"><span class="player-badge">${escapeHTML(initials || "67")}</span>${escapeHTML(player.name)}</div></td>
-          <td><span class="score-value">${player.score}/20</span></td>
-          <td>Wave ${player.wave}</td>
-          <td><span class="mode-chip">${escapeHTML(player.mode)}</span></td>
-          <td>${escapeHTML(player.map)}</td>
-        </tr>`;
+        const badge = player.avatar ? `<img src="${escapeHTML(player.avatar)}" alt="">` : escapeHTML(initials || "67");
+        return `<li class="streak-row">
+          <span class="rank ${index === 0 ? "top" : ""}">#${index+1}</span>
+          <div class="player"><span class="player-badge">${badge}</span><span class="player-name"><strong>${escapeHTML(player.name)}</strong><small>${escapeHTML(player.handle || "Local player")}</small></span></div>
+          <span class="streak-value"><i class="fa-solid fa-fire" aria-hidden="true"></i>${Number(player.streak).toLocaleString()}</span>
+        </li>`;
       }).join("");
     }
 
     document.getElementById("scoreForm").addEventListener("submit", event => {
       event.preventDefault();
       const name = document.getElementById("playerName").value.trim();
-      const score = Math.max(0, Math.min(20, Number(document.getElementById("playerScore").value)));
-      const wave = Math.max(1, Math.min(99, Number(document.getElementById("playerWave").value)));
-      const mode = document.getElementById("playerMode").value;
-      const map = document.getElementById("playerMap").value;
-      if (!name || !Number.isFinite(score) || !Number.isFinite(wave)) return;
-      leaders.push({name, score, wave, mode, map, createdAt: Date.now()});
-      leaders = leaders.sort((a,b) => b.score - a.score || b.wave - a.wave || b.createdAt - a.createdAt).slice(0, 20);
+      const streak = Math.max(0, Math.min(999999, Number(document.getElementById("playerStreak").value)));
+      if (!name || !Number.isFinite(streak)) return;
+      leaders.push({name, streak, handle:"Local player", createdAt:Date.now()});
+      leaders = leaders.sort((a,b) => b.streak - a.streak || b.createdAt - a.createdAt).slice(0, 10);
       localStorage.setItem(leaderStorageKey, JSON.stringify(leaders));
       renderLeaders();
       const feedback = document.getElementById("leaderFeedback");
-      feedback.textContent = `${name}'s ${score}/20 result was added to this device.`;
+      feedback.textContent = `${name}'s ${streak.toLocaleString()} win streak was added to this device.`;
       feedback.classList.add("show");
       event.target.reset();
-      document.getElementById("playerScore").value = 20;
-      document.getElementById("playerWave").value = 1;
+      document.getElementById("playerStreak").value = 1;
     });
 
     const menuBtn = document.getElementById("menuBtn");
